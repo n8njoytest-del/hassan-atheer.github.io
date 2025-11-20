@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hassan Atheer Hasan - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0C3C59;
+            --secondary: #1E8AA8;
+            --accent: #FF8A3D;
+            --bg-color: #F0F4F8;
+            --text-color: #2D3748;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+            --shadow-light: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --blob-color-1: #FF8A3D;
+            --blob-color-2: #1E8AA8;
+            --blob-color-3: #0C3C59;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Progress Bar */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        #progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Glassmorphism Utility */
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: var(--glass-border);
+            box-shadow: var(--shadow-light);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden; /* For glow effect */
+        }
+        
+        /* Mouse Glow Effect Layer */
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: var(--y, -50%);
+            left: var(--x, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle closest-side, rgba(255,255,255,0.4), transparent);
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .glass:hover::before {
+            opacity: 1;
+        }
+
+        /* Hero Section with Aurora Effect */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #051e2e;
+            padding-top: 60px;
+        }
+
+        /* Animated Background Blobs */
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .blob-1 {
+            width: 500px; height: 500px;
+            background: var(--blob-color-1);
+            top: -10%; left: -10%;
+            animation-delay: 0s;
+        }
+        .blob-2 {
+            width: 400px; height: 400px;
+            background: var(--blob-color-2);
+            bottom: -10%; right: -10%;
+            animation-delay: -5s;
+        }
+        .blob-3 {
+            width: 300px; height: 300px;
+            background: var(--blob-color-3);
+            top: 40%; left: 40%;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        /* Liquid Morphing Profile */
+        .profile-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 30px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            /* Liquid Morph Animation */
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+            border: 4px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transition: all 0.5s ease;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+            opacity: 0;
+            animation: fadeUpBlur 1s ease-out forwards 0.2s;
+        }
+
+        .typewriter-text {
+            font-size: 1.4em;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 25px;
+            min-height: 1.8em;
+            display: block;
+            text-shadow: 0 0 20px rgba(255, 138, 61, 0.4);
+        }
+
+        .hero .description {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 750px;
+            margin: 0 auto 40px;
+            line-height: 1.9;
+            opacity: 0;
+            animation: fadeUpBlur 1s ease-out forwards 0.6s;
+        }
+
+        /* Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUpBlur 1s ease-out forwards 0.8s;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Elastic bounce */
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-size: 1.1em;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 138, 61, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 138, 61, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUpBlur 1s ease-out forwards 1s;
+        }
+
+        .quick-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.95em;
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .quick-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8em;
+            color: var(--primary);
+            margin-bottom: 60px;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+            letter-spacing: -1px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 6px;
+            background: var(--accent);
+            margin: 15px auto 0;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+        
+        .section-title:hover::after {
+            width: 120px;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px;
+            text-align: center;
+            font-size: 1.25em;
+            position: relative;
+        }
+        
+        .about-content::before {
+            content: '❝';
+            font-size: 10em;
+            color: var(--primary);
+            opacity: 0.05;
+            position: absolute;
+            top: -40px;
+            right: 20px;
+            font-family: serif;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .skill-card {
+            padding: 30px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(12, 60, 89, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 10px;
+            width: 0;
+            transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        /* Learning Tags */
+        .learning-section {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, #0C3C59 0%, #165578 100%);
+            color: white;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(12, 60, 89, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Decorative circles in learning section */
+        .learning-section::after {
+            content: '';
+            position: absolute;
+            width: 200px; height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            top: -50px; right: -50px;
+        }
+
+        .learning-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .learning-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1em;
+            transition: 0.4s;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: default;
+            backdrop-filter: blur(5px);
+        }
+
+        .learning-item:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: white;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .portfolio-card a {
+            text-decoration: none;
+            color: inherit;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 50px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shine effect on hover */
+        .portfolio-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+        
+        .portfolio-card:hover .portfolio-header::before {
+            left: 150%;
+        }
+
+        .portfolio-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .portfolio-card:hover .portfolio-icon {
+            transform: scale(1.2);
+        }
+
+        .portfolio-body {
+            padding: 40px 30px;
+            flex-grow: 1;
+        }
+
+        .portfolio-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Achievements */
+        .achievement-card {
+            background: white;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .achievement-card:hover {
+            border-color: var(--accent);
+            transform: translateX(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* LTR flip */
+        html[dir="ltr"] .achievement-card:hover {
+            transform: translateX(10px);
+        }
+
+        .achievement-icon {
+            font-size: 2.5em;
+            background: rgba(255, 138, 61, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            color: var(--accent);
+            transition: 0.3s;
+        }
+        
+        .achievement-card:hover .achievement-icon {
+            background: var(--accent);
+            color: white;
+            transform: rotate(10deg);
+        }
+
+        /* Contact */
+        .contact-section {
+            background: #051e2e;
+            color: white;
+            padding-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Subtle grid background */
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        .contact-section .section-title { color: white; }
+        .contact-section .section-title::after { background: white; }
+
+        .contact-main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 50px auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-main-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .contact-main-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .contact-main-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        .contact-value a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 1.1em;
+        }
+        
+        .contact-value a:hover { color: white; text-shadow: 0 0 10px white; }
+
+        /* Footer */
+        footer {
+            background: #020d14;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9em;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 1001;
+            background: rgba(255,255,255,0.8);
+            padding: 8px 16px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        
+        html[dir="ltr"] .lang-switch { left: auto; right: 25px; }
+        
+        .lang-switch:hover { background: white; transform: scale(1.05); }
+
+        .lang-switch select {
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Cinematic Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            filter: blur(10px); /* Initial blur state */
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+
+        @keyframes fadeUpBlur {
+            0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2em; }
+            .section-title { font-size: 2em; }
+            .about-content { padding: 30px; }
+            .blob-1, .blob-2, .blob-3 { transform: scale(0.6); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- Language selector -->
+    <div class="lang-switch glass">
+        <select id="langSelect" aria-label="Select language">
+            <option value="en">🇺🇸 English</option>
+            <option value="ar" selected>🇮🇶 العربية</option>
+        </select>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Animated Background Blobs -->
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
+
+        <div class="hero-content">
+            <div class="profile-container">
+                <img src="hasan.jfif" alt="Hassan Atheer" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Hassan+Atheer&background=FF8A3D&color=fff&size=200'">
+            </div>
+            
+            <h1 data-i18n="name">حسن أثير حسن</h1>
+            <span class="typewriter-text" id="typewriter"></span>
+            
+            <p class="description" data-i18n="description">
+                طالب سنة ثالثة في الجامعة التقنية الشمالية، الكلية التقنية للصحة والتقنيات الطبية - الدور. أطور مهاراتي في صحة البصر، البحث العلمي، البرمجة، وتصميم العروض التقديمية التعليمية والمهنية. أسعى لإنشاء حلول بصرية ذكية ومؤثرة في المجال الطبي.
+            </p>
+
+            <div class="cta-buttons">
+                <a href="#portfolio" class="btn btn-primary" data-i18n="btn_portfolio">عرض أعمالي 🎨</a>
+                <a href="#contact" class="btn btn-secondary" data-i18n="btn_contact">تواصل معي 📬</a>
+            </div>
+
+            <div class="quick-links">
+                <a href="#about" class="quick-link" data-i18n="quick_about">🎓 نبذة عني</a>
+                <a href="#skills" class="quick-link" data-i18n="quick_skills">🛠️ المهارات</a>
+                <a href="#portfolio" class="quick-link" data-i18n="quick_projects">💻 المشاريع</a>
+                <a href="#achievements" class="quick-link" data-i18n="quick_achievements">🏆 الإنجازات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title reveal" data-i18n="section_about">نبذة عني 📖</h2>
+             <div class="about-content glass reveal">
+                <p class="about-text" data-i18n="about_text">
+                    أنا حسن أثير حسن، طالب سنة ثالثة في الجامعة التقنية الشمالية، الكلية التقنية للصحة والتقنيات الطبية - الدور. شغوف بتقنيات البصريات الطبية وأطور باستمرار مهاراتي في البحث العلمي، تصميم العروض التقديمية، وتحليل البيانات. هدفي هو الابتكار في مجال صحة البصر والمساهمة في التقدم العلمي.
+                </p>
+             </div>
+         </div>
+     </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title reveal" data-i18n="section_skills">المهارات التقنية 🛠️</h2>
+            
+            <div class="skills-grid">
+                <!-- Cards will glow on hover via JS/CSS -->
+                <div class="skill-card glass reveal stagger-1 js-tilt">
+                    <div class="skill-header">
+                        <div class="skill-name" data-i18n="skill_word_name">Microsoft Word</div>
+                        <div class="skill-level" data-i18n="skill_word_level">متوسط</div>
+                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+                    <div class="skill-description" data-i18n="skill_word_desc">التقارير الأكاديمية والمستندات</div>
+                </div>
+
+                <div class="skill-card glass reveal stagger-2 js-tilt">
+                    <div class="skill-header">
+                        <div class="skill-name" data-i18n="skill_ppt_name">PowerPoint</div>
+                        <div class="skill-level" style="color:var(--accent)" data-i18n="skill_ppt_level">متقدم</div>
+                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="90%" style="background: linear-gradient(90deg, var(--accent), #ff5722);"></div></div>
+                    <div class="skill-description" data-i18n="skill_ppt_desc">العروض التقديمية الاحترافية</div>
+                </div>
+
+                <div class="skill-card glass reveal stagger-3 js-tilt">
+                    <div class="skill-header">
+                        <div class="skill-name" data-i18n="skill_excel_name">Microsoft Excel</div>
+                        <div class="skill-level" data-i18n="skill_excel_level">متوسط</div>
+                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="65%"></div></div>
+                    <div class="skill-description" data-i18n="skill_excel_desc">تحليل البيانات والجداول</div>
+                </div>
+
+                <div class="skill-card glass reveal stagger-1 js-tilt">
+                    <div class="skill-header">
+                        <div class="skill-name" data-i18n="skill_n8n_name">n8n Automation</div>
+                        <div class="skill-level" data-i18n="skill_n8n_level">جيد</div>
+                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="75%" style="background: linear-gradient(90deg, #ea4c89, #ff2f6d);"></div></div>
+                    <div class="skill-description" data-i18n="skill_n8n_desc">أتمتة سير العمل</div>
+                </div>
+
+                <div class="skill-card glass reveal stagger-2 js-tilt">
+                    <div class="skill-header">
+                        <div class="skill-name" data-i18n="skill_python_name">Python</div>
+                        <div class="skill-level" data-i18n="skill_python_level">مبتدئ</div>
+                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="50%"></div></div>
+                    <div class="skill-description" data-i18n="skill_python_desc">OCR وبرمجة بسيطة</div>
+                </div>
+
+                <div class="skill-card glass reveal stagger-3 js-tilt">
+                    <div class="skill-header">
+                        <div class="skill-name" data-i18n="skill_design_name">Presentation Design</div>
+                        <div class="skill-level" style="color:var(--accent)" data-i18n="skill_design_level">متقدم</div>
+                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="85%" style="background: linear-gradient(90deg, var(--accent), #ff5722);"></div></div>
+                    <div class="skill-description" data-i18n="skill_design_desc">تصميم بصري جذاب</div>
+                </div>
+            </div>
+
+            <div class="learning-section reveal">
+                <h3 data-i18n="learning_heading">🎯 حالياً أتعلم</h3>
+                <div class="learning-grid">
+                    <div class="learning-item" data-i18n="learning_python">برمجة Python</div>
+                    <div class="learning-item" data-i18n="learning_spss">تحليل SPSS الإحصائي</div>
+                    <div class="learning-item" data-i18n="learning_medterms">المصطلحات الطبية</div>
+                    <div class="learning-item" data-i18n="learning_ai">أتمتة الذكاء الاصطناعي</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title reveal" data-i18n="section_portfolio">المشاريع 💻</h2>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-card glass reveal stagger-1 js-tilt">
+                    <a href="https://github.com/hassanatheer" target="_blank">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">🔍</div>
+                            <div class="portfolio-title" data-i18n="portfolio_ocr_title">OCR Extractor</div>
+                        </div>
+                        <div class="portfolio-body">
+                            <p class="portfolio-description" data-i18n="portfolio_ocr_desc">
+                                أداة استخراج نصوص بالذكاء الاصطناعي من الكتب والصور وملفات PDF. تدعم الإنجليزية، اليابانية، والعربية المعقدة.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="portfolio-card glass reveal stagger-2 js-tilt">
+                    <a href="https://github.com/hassanatheer" target="_blank">
+                        <div class="portfolio-header" style="background: linear-gradient(135deg, #FF8A3D, #FF5722);">
+                            <div class="portfolio-icon">⚙️</div>
+                            <div class="portfolio-title" data-i18n="portfolio_n8n_title">n8n Automation</div>
+                        </div>
+                        <div class="portfolio-body">
+                            <p class="portfolio-description" data-i18n="portfolio_n8n_desc">
+                                أتمتة ترجمة ملفات PDF، تنسيق البريد الإلكتروني، ومعالجة البيانات بشكل آلي وفعال.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="portfolio-card glass reveal stagger-3 js-tilt">
+                    <a href="https://github.com/hassanatheer" target="_blank">
+                        <div class="portfolio-header" style="background: linear-gradient(135deg, #4299e1, #2b6cb0);">
+                            <div class="portfolio-icon">🤖</div>
+                            <div class="portfolio-title" data-i18n="portfolio_bot_title">Customer Support Bot</div>
+                        </div>
+                        <div class="portfolio-body">
+                            <p class="portfolio-description" data-i18n="portfolio_bot_desc">
+                                بوت يستقبل الرسائل عبر Telegram/WhatsApp، ينظم البريد الإلكتروني، ويرسل ردود منظمة تلقائياً.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title reveal" data-i18n="section_achievements">الإنجازات 🏆</h2>
+            
+            <div class="achievements-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="achievement-card glass reveal stagger-1" onclick="window.open('certificates/linux.jpg', '_blank')">
+                    <div class="achievement-icon">🐧</div>
+                    <div>
+                        <div class="achievement-title" data-i18n="ach_linux_title">Complete Linux Training</div>
+                        <div style="color:var(--secondary); font-size:0.9em;">Udemy | 2025</div>
+                    </div>
+                </div>
+
+                <div class="achievement-card glass reveal stagger-2" onclick="window.open('certificates/icdl.jpg', '_blank')">
+                    <div class="achievement-icon">💻</div>
+                    <div>
+                        <div class="achievement-title" data-i18n="ach_icdl_title">ICDL Certificate</div>
+                        <div style="color:var(--secondary); font-size:0.9em;">Udemy | 2025</div>
+                    </div>
+                </div>
+
+                <div class="achievement-card glass reveal stagger-3" onclick="window.open('certificates/python.jpg', '_blank')">
+                    <div class="achievement-icon">🐍</div>
+                    <div>
+                        <div class="achievement-title" data-i18n="ach_python_title">Python for Everybody</div>
+                        <div style="color:var(--secondary); font-size:0.9em;">Udemy | 2025</div>
+                    </div>
+                </div>
+
+                <div class="achievement-card glass reveal stagger-4" onclick="window.open('certificates/cybersecurity.jpg', '_blank')">
+                    <div class="achievement-icon">🔒</div>
+                    <div>
+                        <div class="achievement-title" data-i18n="ach_cyber_title">Cyber Security Expert</div>
+                        <div style="color:var(--secondary); font-size:0.9em;">Prague Airport | 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title reveal" data-i18n="section_contact">تواصل معي 📬</h2>
+            <p data-i18n="contact_paragraph" style="text-align:center; font-size: 1.2em; margin-bottom: 30px; opacity: 0.9;" class="reveal">
+                هل لديك مشروع أو فكرة؟ دعنا نعمل معاً!
+            </p>
+            
+            <div class="contact-main-grid reveal">
+                <div class="contact-main-card">
+                   <div class="contact-main-icon">📧</div>
+                   <div style="opacity:0.8; margin-bottom:5px;" data-i18n="email_label">البريد الإلكتروني</div>
+                   <div class="contact-value"><a href="mailto:hassan.atheer.work@gmail.com">hassan.atheer.work@gmail.com</a></div>
+                </div>
+
+                <div class="contact-main-card">
+                   <div class="contact-main-icon">📱</div>
+                   <div style="opacity:0.8; margin-bottom:5px;" data-i18n="phone_label">الهاتف</div>
+                   <div class="contact-value" style="direction: ltr;">+964 777 303 6269</div>
+                </div>
+
+                <div class="contact-main-card">
+                   <div class="contact-main-icon">✈️</div>
+                   <div style="opacity:0.8; margin-bottom:5px;" data-i18n="telegram_label">تيليجرام</div>
+                   <div class="contact-value">
+                       <a id="telegramLink" href="https://t.me/reportjoy" target="_blank">@reportjoy</a>
+                   </div>
+                </div>
+
+                <div class="contact-main-card">
+                   <div class="contact-main-icon">💼</div>
+                   <div style="opacity:0.8; margin-bottom:5px;" data-i18n="linkedin_label">LinkedIn</div>
+                   <div class="contact-value" style="font-size: 0.9em;">
+                       <a href="https://www.linkedin.com/in/hasan-atheer-hasan-652963333" target="_blank">Visit Profile</a>
+                   </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;" class="reveal">
+                <a href="mailto:hassan.atheer.work@gmail.com" class="btn btn-primary" style="padding: 15px 50px; font-size: 1.2em;">أرسل رسالة ✉️</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-i18n="footer_text">© 2025 Hassan Atheer Hasan — جميع الحقوق محفوظة | صُمم برؤية للمستقبل 👁️✨</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Translations & Language Logic ---
+        const translations = {
+            ar: {
+                name: "حسن أثير حسن",
+                typewriter_phrases: ["طالب تقنيات بصرية 👓", "مطور بايثون 🐍", "مصمم عروض علمية 📊", "باحث أكاديمي 🔬"],
+                description: "طالب سنة ثالثة في الجامعة التقنية الشمالية، الكلية التقنية للصحة والتقنيات الطبية - الدور. أطور مهاراتي في صحة البصر، البحث العلمي، البرمجة، وتصميم العروض التقديمية التعليمية والمهنية. أسعى لإنشاء حلول بصرية ذكية ومؤثرة في المجال الطبي.",
+                btn_portfolio: "عرض أعمالي 🎨",
+                btn_contact: "تواصل معي 📬",
+                quick_about: "🎓 نبذة عني",
+                quick_skills: "🛠️ المهارات",
+                quick_projects: "💻 المشاريع",
+                quick_achievements: "🏆 الإنجازات",
+                section_about: "نبذة عني 📖",
+                about_text: "أنا حسن أثير حسن، طالب سنة ثالثة في الجامعة التقنية الشمالية، الكلية التقنية للصحة والتقنيات الطبية - الدور. شغوف بتقنيات البصريات الطبية وأطور باستمرار مهاراتي في البحث العلمي، تصميم العروض التقديمية، وتحليل البيانات. هدفي هو الابتكار في مجال صحة البصر والمساهمة في التقدم العلمي.",
+                section_skills: "المهارات التقنية 🛠️",
+                skill_word_name: "Microsoft Word",
+                skill_word_level: "متوسط",
+                skill_word_desc: "التقارير الأكاديمية والمستندات الرسمية",
+                skill_ppt_name: "PowerPoint",
+                skill_ppt_level: "متقدم",
+                skill_ppt_desc: "العروض التقديمية العلمية والاحترافية",
+                skill_excel_name: "Microsoft Excel",
+                skill_excel_level: "متوسط",
+                skill_excel_desc: "تحليل البيانات والجداول المتقدمة",
+                skill_n8n_name: "n8n Automation",
+                skill_n8n_level: "جيد",
+                skill_n8n_desc: "أتمتة سير العمل والمهام المتكررة",
+                skill_python_name: "Python",
+                skill_python_level: "مبتدئ",
+                skill_python_desc: "OCR وأتمتة سير العمل",
+                skill_design_name: "Presentation Design",
+                skill_design_level: "متقدم",
+                skill_design_desc: "تصميم عروض تقديمية جذابة ومؤثرة",
+                learning_heading: "🎯 حالياً أتعلم",
+                learning_python: "برمجة Python",
+                learning_spss: "تحليل SPSS الإحصائي",
+                learning_medterms: "المصطلحات الطبية المتقدمة",
+                learning_ai: "أتمتة سير العمل بالذكاء الاصطناعي",
+                section_portfolio: "المشاريع 💻",
+                portfolio_ocr_title: "OCR Extractor",
+                portfolio_ocr_desc: "أداة استخراج نصوص بالذكاء الاصطناعي من الكتب والصور وملفات PDF. تدعم الإنجليزية واليابانية والعربية.",
+                portfolio_n8n_title: "n8n Workflow",
+                portfolio_n8n_desc: "أتمتة ترجمة ملفات PDF، تنسيق البريد الإلكتروني، ومعالجة البيانات بشكل آلي.",
+                portfolio_bot_title: "Support Bot",
+                portfolio_bot_desc: "بوت يستقبل الرسائل عبر Telegram/WhatsApp، وينظم الردود تلقائياً.",
+                section_achievements: "الإنجازات والشهادات 🏆",
+                ach_linux_title: "Linux Training",
+                ach_icdl_title: "ICDL Certificate",
+                ach_python_title: "Python for Everybody",
+                ach_cyber_title: "Cyber Security Expert",
+                section_contact: "تواصل معي 📬",
+                contact_paragraph: "هل لديك مشروع أو فكرة؟ دعنا نعمل معاً!",
+                email_label: "البريد الإلكتروني",
+                phone_label: "الهاتف",
+                telegram_label: "تيليجرام",
+                linkedin_label: "LinkedIn",
+                footer_text: "© 2025 Hassan Atheer Hasan — جميع الحقوق محفوظة | صُمم برؤية للمستقبل 👁️✨"
+            },
+            en: {
+                name: "Hassan Atheer Hasan",
+                typewriter_phrases: ["Medical Optics Student 👓", "Python Developer 🐍", "Presentation Designer 📊", "Academic Researcher 🔬"],
+                description: "Third-year student at Northern Technical University, College of Health and Medical Technologies - Dour. Developing skills in ocular health, scientific research, programming and presentation design. I aim to create impactful visual solutions in the medical field.",
+                btn_portfolio: "View Portfolio 🎨",
+                btn_contact: "Contact Me 📬",
+                quick_about: "🎓 About",
+                quick_skills: "🛠️ Skills",
+                quick_projects: "💻 Projects",
+                quick_achievements: "🏆 Awards",
+                section_about: "About Me 📖",
+                about_text: "I'm Hassan Atheer Hasan, a third-year student at Northern Technical University. Passionate about medical optics, I continually improve my skills in research, presentation design, and data analysis. My goal is to innovate in eye care and contribute to scientific progress.",
+                section_skills: "Technical Skills 🛠️",
+                skill_word_name: "Microsoft Word",
+                skill_word_level: "Intermediate",
+                skill_word_desc: "Academic reports and docs",
+                skill_ppt_name: "PowerPoint",
+                skill_ppt_level: "Advanced",
+                skill_ppt_desc: "Scientific presentations",
+                skill_excel_name: "Microsoft Excel",
+                skill_excel_level: "Intermediate",
+                skill_excel_desc: "Data analysis sheets",
+                skill_n8n_name: "n8n Automation",
+                skill_n8n_level: "Good",
+                skill_n8n_desc: "Workflow automation",
+                skill_python_name: "Python",
+                skill_python_level: "Beginner",
+                skill_python_desc: "OCR & Scripts",
+                skill_design_name: "Presentation Design",
+                skill_design_level: "Advanced",
+                skill_design_desc: "Visual storytelling",
+                learning_heading: "🎯 Currently Learning",
+                learning_python: "Python Programming",
+                learning_spss: "SPSS Analysis",
+                learning_medterms: "Medical Terminology",
+                learning_ai: "AI Automation",
+                section_portfolio: "Projects 💻",
+                portfolio_ocr_title: "OCR Extractor",
+                portfolio_ocr_desc: "AI text extraction tool for books/PDFs. Supports English, Japanese & Arabic.",
+                portfolio_n8n_title: "n8n Workflow",
+                portfolio_n8n_desc: "Automating PDF translations, email formatting and data processing.",
+                portfolio_bot_title: "Support Bot",
+                portfolio_bot_desc: "Telegram/WhatsApp bot for organizing emails and automated replies.",
+                section_achievements: "Achievements 🏆",
+                ach_linux_title: "Linux Training",
+                ach_icdl_title: "ICDL Certificate",
+                ach_python_title: "Python for Everybody",
+                ach_cyber_title: "Cyber Security Expert",
+                section_contact: "Contact Me 📬",
+                contact_paragraph: "Have a project or idea? Let's collaborate!",
+                email_label: "Email",
+                phone_label: "Phone",
+                telegram_label: "Telegram",
+                linkedin_label: "LinkedIn",
+                footer_text: "© 2025 Hassan Atheer Hasan — All rights reserved | Designed for the future 👁️✨"
+            }
+        };
+
+        let currentLang = localStorage.getItem('siteLang') || 'ar';
+        let typeWriterInterval;
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            
+            // Update simple text elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+
+            // Update Selection Box
+            const sel = document.getElementById('langSelect');
+            if(sel) {
+                sel.value = lang; 
+            }
+
+            localStorage.setItem('siteLang', lang);
+            
+            // Restart Typewriter with new language
+            startTypewriter();
+        }
+
+        // --- 2. Typewriter Effect Logic ---
+        function startTypewriter() {
+            const phrases = translations[currentLang].typewriter_phrases;
+            const element = document.getElementById('typewriter');
+            if(typeWriterInterval) clearInterval(typeWriterInterval);
+            
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let isWaiting = false;
+
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+                
+                if (isWaiting) return;
+
+                if (isDeleting) {
+                    element.innerText = currentPhrase.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    element.innerText = currentPhrase.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    isWaiting = true;
+                    setTimeout(() => { isDeleting = true; isWaiting = false; }, 2000);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                }
+            }
+
+            typeWriterInterval = setInterval(type, 100);
+        }
+
+        // --- 3. Animations & Scroll Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Language
+            applyLanguage(currentLang);
+            document.getElementById('langSelect').addEventListener('change', (e) => applyLanguage(e.target.value));
+
+            // Telegram Logic
+            const tgLink = document.getElementById('telegramLink');
+            if(tgLink) {
+                tgLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const username = 'reportjoy';
+                    window.location.href = `tg://resolve?domain=${username}`;
+                    setTimeout(() => { window.open(`https://t.me/${username}`, '_blank'); }, 500);
+                });
+            }
+
+            // Intersection Observer for Reveals
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // If it's a skill bar, animate width
+                        if(entry.target.classList.contains('skill-card')) {
+                            const bar = entry.target.querySelector('.skill-progress');
+                            if(bar) bar.style.width = bar.getAttribute('data-width');
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("progress-bar").style.width = scrolled + "%";
+            });
+
+            // 3D Tilt Effect with Mouse Glow
+            document.querySelectorAll('.js-tilt').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Calculate rotation
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -8; 
+                    const rotateY = ((x - centerX) / centerX) * 8;
+
+                    // Apply rotation
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                    
+                    // Update glow position
+                    card.style.setProperty('--x', x + 'px');
+                    card.style.setProperty('--y', y + 'px');
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
